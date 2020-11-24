@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>  
+            <p:menubar>   
+                <p:submenu label="Artistas">                        
+                    <p:menuitem value="Lista de Artistas" outcome="listaArtistas"/>
+                    <p:separator />
+                    <p:menuitem value="Registrar Artista" outcome="registroArtista" />
+                </p:submenu>
+                <p:menuitem value="Quit" outcome="index" />
+            </p:menubar>
+        </h:form>  
+        <p:dataTable var="album" value="#{listaDiscoController.albumnes}"  style="width: 100%; height: 60%"  rows="2"
+                 paginator="true"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                 rowsPerPageTemplate="2,5,10">            
+            <p:column headerText="Foto" style="width: 20%">
+                <img width="100px" height="100px" src="../assets/#{album.caratula}" />
+            </p:column>
+
+            <p:column headerText="Nombre Disco" style="width: 20%">
+                <h:outputText value="#{album.nombre}" />
+            </p:column>
+
+            <p:column headerText="Valor Total" style="width: 20% ">
+                <h:outputText value="#{album.valor}" />
+            </p:column>
+
+            <p:column style="width:10%;text-align: center" >
+                <p:commandButton value="Canciones" action="#{listaDiscoController.cancion(album.id)}"></p:commandButton>
+            </p:column>
+        </p:dataTable> 
+        <h:form style="width: 100%; height: 60%" enctype="multipart/form-data"> 
+            <p:panelGrid columns="2">       
+                <p:fileUpload id="foto" value="#{listaDiscoController.caratula}" mode="simple" skinSimple="true"/>
+            </p:panelGrid>
+            <h3>Nombre</h3>
+            <span class="ui-float-label">
+                <p:inputText id="nombre" value="#{listaDiscoController.nombre}" required="true" requiredMessage="Ingrese el nombre"/>
+                <p:outputLabel for="nombre" value="Nombre" />
+                <p:message for="nombre" /> 
+            </span>
+            <h3>Valor</h3>
+            <p:inputNumber id="valor" value="#{listaDiscoController.valor}" required="true" requiredMessage="Ingrese el valor" minValue="0">  
+                <p:ajax update="valor" />  
+            </p:inputNumber>  
+            <p:message for="valor" /> 
+            <p:commandButton type="submit" action="#{listaDiscoController.ingresarAlbum()}" ajax="false" value="Registar" update="@form"></p:commandButton> 
+        </h:form>
+    </h:body>
+</html>
+
