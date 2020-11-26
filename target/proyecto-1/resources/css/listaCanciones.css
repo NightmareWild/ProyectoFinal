@@ -1,0 +1,107 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26-nov-2020, 3:39:38
+    Author     : Brayan
+*/
+
+.lista{
+    position: relative;
+    left: -7%;
+    flex-flow: row;
+    width: 395px;
+    height: 66px;
+    margin: 38px auto;
+}
+
+.tabla {
+    margin: -97px auto;
+    padding: 121px;
+    border-radius: 80px;
+}
+body {
+background: url(../assets/css/k.jpg) #CCC no-repeat;
+background-size:cover;
+background-position: center center;
+background-attachment: fixed;
+}
+
+
+element.style {
+    left: 40%;
+    width: 20%;
+    height: 56%;
+}
+body .ui-helper-reset {
+    line-height: normal;
+}
+.ui-menu-list {
+    position: static;
+}
+.ui-helper-reset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    line-height: 1.3;
+    text-decoration: none;
+    font-size: 100%;
+    list-style: none;
+}
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body .ui-widget:not(.pi), body .ui-widget .ui-widget:not(.pi) {
+    font-family: "Open Sans","Helvetica Neue",sans-serif;
+    font-size: 17px;
+}
+.registro{
+    text-align: center;
+    color: #5a478c;
+    font-family: "Segoe UI";
+    background-size:cover;
+    background-position: center center;
+    background-attachment: fixed;
+    margin: 45px auto;
+    width: 373px;
+    background-color: #7a00ff38;
+    padding: 21px;
+    border-radius: 40px;
+
+}
+.btn {
+  border: 2px solid transparent;
+  background: #3498DB;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 25px;
+  padding: 10px 0;
+  text-decoration: none;
+  text-shadow: none;
+  border-radius: 3px;
+  box-shadow: none;
+  transition: 0.25s;
+  display: block;
+  width: 250px;
+  margin: 0 auto;
+}
+.registro-screen {
+background-color: #FFF;
+padding: 20px;
+border-radius: 7px
+}
+
+.letrero{
+text-align: center;
+color: #200C54;
+}
+
+.orientacion{
+    text-align: left;
+}

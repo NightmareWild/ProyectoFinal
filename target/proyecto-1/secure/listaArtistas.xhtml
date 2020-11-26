@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="listaArtistas.css"/>
+    </h:head>
+    <h:body>
+        <h:form>  
+            <p:menubar>   
+                <p:menuitem value="Salir" outcome="/index"  icon="pi pi-sign-out"/>
+                <p:submenu label="Artistas">                        
+                    <p:menuitem value="Lista de Artistas" outcome="listaArtistas"/>
+                    <p:separator />
+                    <p:menuitem value="Registrar Artista" outcome="registroArtista" />
+                </p:submenu>
+            </p:menubar>
+        </h:form>
+        <div class="lista">
+            <img src="../assets/css/s.jpg"></img>
+        </div> 
+        <h:form>
+            <p:growl id="msgs" showDetail="true"/>
+            <div class="table">
+                <p:dataTable var="artista" value="#{listaArtistasController.artistas}" editable="true" style="width: 100% " rows="5"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                             rowsPerPageTemplate="5,10,15">        
+                    <p:ajax event="rowEdit" listener="#{listaArtistasController.onRowEdit}" update="@form:msgs"/>
+
+                    <p:column headerText="Foto" style="width: 20%; text-align: center">    
+                        <p:cellEditor>
+                            <f:facet name="output"><img width="100px" height="100px" src="../assets/#{artista.foto}" /></f:facet>
+                            <f:facet name="input"><img width="100px" height="100px" src="../assets/#{artista.foto}" /></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Nombre" style="width: 20%">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{artista.nombre}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{artista.nombre}" style="width:100%" required="true" requiredMessage="Ingrese el nombre"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Genero" style="width: 20% ">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{artista.genero}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{artista.genero}" style="width:100%" required="true" requiredMessage="Ingrese el genero"/></f:facet>
+                        </p:cellEditor>
+
+                    </p:column>
+
+                    <p:column headerText="Fecha de Nacimiento" style="width: 20% ">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{artista.fechaNacimiento}" /></f:facet>
+                            <f:facet name="input"><p:calendar id="fecha" value="#{artista.fechaNacimiento}" required="true" requiredMessage="Ingrese la fecha de nacimiento" style="width:100%"/></f:facet>
+                        </p:cellEditor>                    
+                    </p:column>
+
+                    <p:column style="width:35px">
+                        <p:rowEditor />
+                    </p:column>
+
+                    <p:column style="width:10%;text-align: center" >
+                        <p:commandButton value="Discos" action="#{listaArtistasController.discos(artista.id)}"></p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

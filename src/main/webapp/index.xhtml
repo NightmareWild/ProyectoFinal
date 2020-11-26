@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="login.css"/>
+    </h:head>
+    <h:body>
+        <h:form>
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Login</h1>
+			</div>
+			<div class="login-form">     
+                                <div class="control-group">
+                                    <p:inputText type="text" class="login-field" value="#{login.nombre}" required="true" requiredMessage="Ingrese el usuario" placeholder="usuario" id="login-name"/>
+                                    <label class="login-field-icon fui-user" for="login-name"></label>                                    
+                                    <p:message for="login-name" /> 
+                                </div>
+                                <div class="control-group">
+                                    <p:inputText type="password" class="login-field" value="#{login.clave}" required="true" requiredMessage="Ingrese la contraseña" placeholder="contraseña" id="login-pass"/>
+                                    <label class="login-field-icon fui-lock" for="login-pass"></label>
+                                    <p:message for="login-pass" /> 
+                                </div>
+                                    <p:commandButton actionListener="#{login.logeo()}" value="Login" update="@form"></p:commandButton>                                                              
+                           
+                            <h:form>
+                                <p:linkButton outcome="registro" value="Registrate" ></p:linkButton>
+                            </h:form>  
+			</div>
+		</div>
+	</div>
+        </h:form>
+    </h:body>
+</html>
+

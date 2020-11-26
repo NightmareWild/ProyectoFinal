@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet library="css" name="listaCanciones.css"/>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>  
+            <p:menubar>
+                <p:menuitem value= "Salir" icon="pi pi-sign-out" outcome="/index" />   
+                <p:submenu label="Artistas">
+                    <p:menuitem value="Lista de Artistas" outcome="listaArtistas"/>
+                    <p:separator />
+                    <p:menuitem value="Registrar Artista" outcome="registroArtista" />
+                </p:submenu>
+            </p:menubar>
+        </h:form>   
+        <div class="lista">
+            <img src="../assets/css/g.jpg"></img>
+        </div>
+        <h:form style="width: 100%; height: 60%"> 
+            <p:growl id="msgs" showDetail="true"/>
+            <div class="tabla">
+                <p:dataTable var="cancion" value="#{listaCancionesController.canciones}" editable="true" style="width: 100%; height: 60%" rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                             rowsPerPageTemplate="10,15,20">
+
+                    <p:ajax event="rowEdit" listener="#{listaCancionesController.onRowEdit}" update="@form:msgs"/>
+
+                    <p:column headerText="Nombre Canción" style="width: 20%">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{cancion.nombre}" /></f:facet>
+                            <f:facet name="input"><p:inputText value="#{cancion.nombre}" style="width:100%" required="true" requiredMessage="Ingrese el nombre"/></f:facet>
+                        </p:cellEditor> 
+                    </p:column>
+
+                    <p:column headerText="Valor" style="width: 20% ">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{cancion.valor}" /></f:facet>
+                            <f:facet name="input">
+                                <p:inputNumber id="valor" value="#{cancion.valor}" required="true" requiredMessage="Ingrese el valor" minValue="0">  
+                                    <p:ajax update="valor" />  
+                                </p:inputNumber> 
+                            </f:facet>
+                        </p:cellEditor>  
+                    </p:column>
+
+                    <p:column style="width:35px">
+                        <p:rowEditor />
+                    </p:column>
+                </p:dataTable> 
+            </div>
+            <div class="registro">
+                <div class="letrero">
+                    <h2>REGISTRAR CANCIÓN</h2>
+                </div>
+                <div class="orientacion">
+                    <h3>Nombre</h3>
+                    <span class="ui-float-label">
+                        <p:inputText id="nombre" value="#{listaCancionesController.nombre}" required="true" requiredMessage="Ingrese el nombre"/>
+                        <p:message for="nombre" /> 
+                        <p:outputLabel for="nombre" value="Nombre" />
+                    </span>
+                    <h3>Valor</h3>
+                    <p:inputNumber id="valor" value="#{listaCancionesController.valor}" required="true" requiredMessage="Ingrese el valor" minValue="0">  
+                        <p:ajax update="valor" />  
+                    </p:inputNumber>  
+                    <p:message for="valor" />
+                </div>
+                <div>
+                    <p:commandButton type="submit" action="#{listaCancionesController.ingresarCancion()}" ajax="false" value="Registar" style="margin-top: 4%;" update="@form"></p:commandButton> 
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+
